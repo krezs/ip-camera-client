@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Stream } from '../interfaces/stream';
+import { StreamService } from '../services/stream.service';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +10,14 @@ import { Stream } from '../interfaces/stream';
 export class HomeComponent implements OnInit {
 
   public streams:Array<Stream> = [];
-  constructor() { }
+  constructor(private streamService: StreamService) { }
 
   ngOnInit(): void {
+    this.streamService.getStreams().then((result: any) => {
+      console.log(JSON.stringify(result));
+
+    });
+    // console.log(streams);
     this.streams = [
       {
         name: 'hikvision01'
